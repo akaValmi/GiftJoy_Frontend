@@ -1,4 +1,3 @@
-// components/FilterSection.jsx
 import FilterButton from "./FilterButton";
 
 const FilterSection = ({ label, options, selectedValue, onFilterClick }) => (

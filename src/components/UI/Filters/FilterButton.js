@@ -1,4 +1,3 @@
-// components/FilterButton.jsx
 const FilterButton = ({ value, selectedValue, onClick }) => (
   <button
     onClick={() => onClick(value)}

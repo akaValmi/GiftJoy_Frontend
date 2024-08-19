@@ -23,7 +23,7 @@ const Header = () => {
             placeholder="Buscar..."
             className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <Link href="/carrito" className="hover:text-gray-400">
+          <Link href="/cart" className="hover:text-gray-400">
             <button data-quantity="0" class="btn-cart">
               <svg
                 class="icon-cart"
