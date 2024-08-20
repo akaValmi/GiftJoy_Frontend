@@ -52,8 +52,8 @@ export default function ProductsPage() {
 */
 
 "use client";
-import ProductFilters from "../components/UI/Filters/ProductFilters";
-import ProductCards from "../components/UI/ProductCard";
+import ProductFilters from "../components/product/Filters/ProductFilters";
+import ProductCards from "../components/product/ProductCard";
 import { useEffect, useState } from "react";
 
 export default function ProductsPage() {
@@ -61,7 +61,6 @@ export default function ProductsPage() {
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
-    // Ensure this code only runs in the browser
     if (typeof window !== "undefined") {
       const fetchProducts = async () => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -92,11 +91,11 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="flex gap-4 m-8">
-      <div className="w-1/4">
+    <div className="flex gap-4 mx-auto m-8 max-w-screen-2xl">
+      <div className="flex-shrink-0">
         <ProductFilters onApplyFilters={handleApplyFilters} />
       </div>
-      <div className="w-3/4">
+      <div className="flex-grow gap-6">
         <ProductCards products={products} filters={filters} />
       </div>
     </div>
