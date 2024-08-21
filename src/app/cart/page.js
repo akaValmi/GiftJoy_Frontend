@@ -86,14 +86,20 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CartItem from "../../components/cart/CartItem";
 import CartSummary from "../../components/cart/CartSummary";
+import ObservationsInput from "../../components/cart/ObservationsInput";
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState([]);
+  const [observations, setObservations] = useState(""); // Estado para las observaciones
+
   const router = useRouter();
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const savedObservations = localStorage.getItem("observations") || ""; // Cargar observaciones desde localStorage
+
     setCartItems(cart);
+    setObservations(savedObservations); // Establecer observaciones iniciales
   }, []);
 
   const handleRemove = (ItemTypeID, id) => {
@@ -113,7 +119,10 @@ export default function CartPage() {
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
-
+  const handleObservationChange = (e) => {
+    setObservations(e.target.value);
+    localStorage.setItem("observations", e.target.value); // Guardar observaciones en localStorage
+  };
   const handleCheckout = () => {
     router.push("/checkout");
   };
@@ -136,6 +145,17 @@ export default function CartPage() {
               />
             ))}
           </ul>
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold mb-2">
+              Instrucciones Adicionales
+            </h2>
+            <textarea
+              className="border p-2 w-full"
+              placeholder="Ejemplo: envolver para regalo, con tarjeta de cumpleaños..."
+              value={observations}
+              onChange={handleObservationChange}
+            />
+          </div>
           <CartSummary cartItems={cartItems} onCheckout={handleCheckout} />
         </div>
       )}
