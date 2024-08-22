@@ -92,7 +92,7 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState([]);
   const [observations, setObservations] = useState(""); // Estado para las observaciones
 
-  const router = useRouter();
+  const router = useRouter(); // Hook para manejar redirección
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -119,12 +119,14 @@ export default function CartPage() {
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
+
   const handleObservationChange = (e) => {
     setObservations(e.target.value);
     localStorage.setItem("observations", e.target.value); // Guardar observaciones en localStorage
   };
+
   const handleCheckout = () => {
-    router.push("/checkout");
+    router.push("/checkout"); // Redirigir a la página de checkout
   };
 
   return (
