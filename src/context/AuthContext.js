@@ -1,32 +1,38 @@
-// AuthContext.js
-"use client";
+// context/AuthContext.js
+import { createContext, useContext, useState, useEffect } from "react";
+import settings from "@/services/settings";
 
-import React, { createContext, useContext, useState } from "react";
-
-// Crea el contexto
 const AuthContext = createContext();
 
-// Proveedor del contexto
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // o el estado inicial que necesites
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
 
-  // Funciones para manejar autenticación
-  const login = (userData) => {
-    setUser(userData);
-  };
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      fetch(`${settings.domain}/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setUser(data))
+        .catch((error) => console.error("Error fetching user:", error));
+    }
+  }, []);
 
   const logout = () => {
+    localStorage.removeItem("authToken");
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-// Hook para usar el contexto
-export const useAuth = () => {
+export function useAuth() {
   return useContext(AuthContext);
-};
+}

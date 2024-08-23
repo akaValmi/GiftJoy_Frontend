@@ -1,14 +1,16 @@
+// pages/login.js o cualquier archivo donde tengas el componente Login
+
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Usa "next/navigation" en lugar de "next/router"
-import { postLogin } from "../../services/products";
+import { useRouter } from "next/navigation";
+import { postLogin } from "../../services/users"; // Actualizado a la nueva ubicación
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter(); // Uso correcto de useRouter
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();

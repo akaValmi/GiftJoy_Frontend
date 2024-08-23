@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Importa desde next/navigation en Next.js 13
-import { postSignup } from "../../services/products";
+import { Register } from "../../services/users"; // Asegúrate de importar la función correcta
 
 export default function Signup() {
   const [primerNombre, setPrimerNombre] = useState("");
@@ -17,7 +17,7 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await postSignup({
+      await Register({
         primer_nombre: primerNombre,
         segundo_nombre: segundoNombre,
         primer_apellido: primerApellido,
@@ -25,9 +25,10 @@ export default function Signup() {
         correo: correo,
         password: password,
       });
-      router.push("/login"); // Redirige después de un registro exitoso
+      router.push("/login");
     } catch (err) {
-      setError("Error al registrar el usuario.");
+      console.error("Error during registration:", err); // Para ver detalles en la consola
+      setError(`Error al registrar el usuario: ${err.message}`);
     }
   };
 
