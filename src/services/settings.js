@@ -1,5 +1,5 @@
 const settings = {
-  domain: "https://api-giftjoy-dev.azurewebsites.net",
+  domain: "http://localhost:8000",
 };
 
 export default settings;

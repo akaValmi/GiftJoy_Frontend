@@ -12,7 +12,7 @@ const Resume = ({ subtotal, isv, total }) => {
         <span className="text-lg font-semibold">L. {isv.toFixed(2)}</span>
       </div>
       <div className="flex justify-between">
-        <span className="text-lg font-medium">Total:</span>
+        <span className="text-lg font-medium">Total (sin envío):</span>
         <span className="text-xl font-bold text-blue-600">
           L. {total.toFixed(2)}
         </span>

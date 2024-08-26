@@ -114,9 +114,11 @@ const Page = () => {
           quantity: item.quantity,
           ItemTypeID: item.ItemTypeID,
           colorId: item.colorId,
+          sizeId: item.sizeId,
           productos: item.productos
             ? item.productos.map((product) => ({
                 id: product.id,
+                id_bundle: item.id,
                 name: product.name,
                 quantity: product.quantity,
                 ItemTypeID: product.ItemTypeID,
